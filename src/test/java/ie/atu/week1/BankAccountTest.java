@@ -40,11 +40,41 @@ public class BankAccountTest {
     void depositZeroOrNegativeThrowsException() {
         account = new BankAccount("ACC12345", "Nandita", 100);
 
-        Exception ex = assertThrows(IllegalArgumentException.class,() -> account.deposit(0));
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> account.deposit(0));
         assertEquals("Deposit amount must be positive", ex.getMessage());
 
-        Exception ex2 = assertThrows(IllegalArgumentException.class,() -> account.deposit(-10));//put both zero and negative number in one place
+        Exception ex2 = assertThrows(IllegalArgumentException.class, () -> account.deposit(-10));//put both zero and negative number in one place
         assertEquals("Deposit amount must be positive", ex2.getMessage());
+    }
+
+        @Test
+        void withdrawPositiveReducesBalance() {
+            account = new BankAccount("ACC12345", "Nandita", 100);
+            account.withdraw(40);
+            assertEquals(60, account.getBalance());
+        }
+
+        @Test
+        void withdrawZeroOrNegativeThrowsException() {
+            account = new BankAccount("ACC12345", "Nandita", 100);
+
+            Exception ex = assertThrows(IllegalArgumentException.class,
+                    () -> account.withdraw(0));
+            assertEquals("Withdraw amount must be positive", ex.getMessage());
+
+            Exception ex2 = assertThrows(IllegalArgumentException.class,
+                    () -> account.withdraw(-20));
+            assertEquals("Withdraw amount must be positive", ex2.getMessage());
+        }
+
+        @Test
+        void withdrawMoreThanBalanceThrowsCustomException() {
+            account = new BankAccount("ACC12345", "Nandita", 100);
+
+            Exception ex = assertThrows(IllegalArgumentException.class,
+                    () -> account.withdraw(200));
+            assertEquals("Insufficient funds", ex.getMessage());
+        }
     }
 
 }
