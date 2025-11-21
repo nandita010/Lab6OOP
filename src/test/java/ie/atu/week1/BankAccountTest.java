@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class BankAccountTest {
 
     BankAccount account;
-
+//runs before each test
     @BeforeEach
     void setup()
     {
@@ -23,7 +23,7 @@ public class BankAccountTest {
         assertEquals("Nandita",account.getName());
         assertEquals(100, account.getBalance());
     }
-
+    //creating an account with a negative balance throws an exception
     @Test
     void constructorNegativeInitialisation(){
         Exception ex= assertThrows(IllegalArgumentException.class,()-> new BankAccount("Acc12345", "Nandita", -100));
@@ -53,7 +53,7 @@ public class BankAccountTest {
             account.withdraw(40);
             assertEquals(60, account.getBalance());
         }
-
+// Depositing zero or negative amount should fail.
         @Test
         void withdrawZeroOrNegativeThrowsException() {
             account = new BankAccount("ACC12345", "Nandita", 100);
@@ -77,4 +77,4 @@ public class BankAccountTest {
         }
     }
 
-}
+
