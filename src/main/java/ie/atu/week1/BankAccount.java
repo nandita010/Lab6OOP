@@ -18,7 +18,7 @@ public class BankAccount {
     public BankAccount() {
 
     }
-
+//everything corresponding to the test file
     public String getAccno()
     {
         return accNo;
@@ -38,7 +38,8 @@ public class BankAccount {
         if (amount <= 0) {
             throw new IllegalArgumentException("Deposit amount must be positive");
         }
-        balance += amount;
+        balance -= amount;
+        //Allows withdrawing a positive amount if amnt is greater than 0 and does not exceed balance
     }
 
     public void withdraw(double amount) {
@@ -50,4 +51,5 @@ public class BankAccount {
         }
         balance -= amount;
     }
+    //deducts from balance
 }
